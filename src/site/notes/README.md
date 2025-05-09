@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/readme/","tags":["gardenEntry"]}
+{"dg-publish":true,"dg-home":true,"permalink":"/README/","tags":["gardenEntry"],"dgPassFrontmatter":true}
 ---
 
 # full-stack-147
