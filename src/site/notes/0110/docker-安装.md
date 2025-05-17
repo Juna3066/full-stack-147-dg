@@ -6,7 +6,7 @@
 环境：anolis 8.10 
 
 
-> [!info]+ docker
+> [!cite]+ docker 参考文档
 > https://docs.docker.net.cn/engine/install/
 > https://docs.docker.net.cn/engine/install/centos/
 > https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/
@@ -17,10 +17,10 @@
 sudo systemctl enable --now docker
 ```
 
-> [!info]+ portainer
+> [!cite]+ portainer 参考文档
 > https://docs.portainer.io/start/install-ce/server/docker/linux
 
-> [!info]+ harbor
+> [!cite]+ harbor 参考文档
 > https://goharbor.io/docs/2.0.0/install-config/download-installer/
 
 - 配置 Docker 的 `/etc/docker/daemon. json` 来信任 Harbor 私有仓库时，在 `insecure-registries` 中需要包含协议（即 `http://`）吗？
