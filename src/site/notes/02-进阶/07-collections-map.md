@@ -3,5 +3,21 @@
 ---
 
 
+可变参数
 
-TODO
+## 1. Collections 工具类
+
+斗地主洗牌
+
+## 2. Map
+
+常用操作
+
+HashMap
+
+LinkedHashMap
+
+TreeMap
+
+
+嵌套集合省和市
