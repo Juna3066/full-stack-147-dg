@@ -44,3 +44,6 @@ LinkedHashSet
 树
 
 TreeSet
+
+[[02-进阶/05-常用-api-2\|上一节：05-常用-api-2]]
+[[02-进阶/07-collections-map\|下一节：07-collections-map]]
