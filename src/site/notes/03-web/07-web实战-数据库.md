@@ -21,6 +21,9 @@ MySQL 有社区版和服务器版，一般用社区版 (免费)
 
 ## 2. 图形化工具
 
+### 2.1. DataGrip 2024.3.3
+
+- ctrl + enter 执行 SQL
 
 ## 3. 数据模型
 
@@ -76,6 +79,8 @@ create table tb_xxx(
 
 ### 5.3. MySQL 数据类型
 
+[[06-四方保险/01-项目介绍-环境搭建#3. 数据库建模\|Power Designer 上显示的标准数据类型]]
+
 > [!important]+ 
 > 
 > 重点 
@@ -110,7 +115,14 @@ create table tb_xxx(
 ### 5.6. 表操作-查找-修改-删除
 
 ```sql
-
+show tables ;  
+desc t_user;
+drop table if exists t_user;
+# 修改表结构 字段 类型[长度] [约束]
+alter table t_user add column age int default 0 comment "年龄";
+alter table t_user drop column age;
+alter table t_user modify # 只修改数据类型和长度
+alter table t_user # 如添加，修改所有
 ```
 
 ## 6. DML
@@ -118,34 +130,87 @@ create table tb_xxx(
 ### 6.1. 增
 
 ```sql
-
+insert into table () values ()
+select now();
+字符串插入单引号都行。
 ```
 
 ### 6.2. 删
 
 ```sql
-
+delete from t_xx where condition;
 ```
 
 ### 6.3. 改（更新）
 
 ```sql
-
+update t_xx set x=v,x2=v2 where condition;
 ```
 
 ## 7. DQL
 
 ### 7.1. 基本查询
 
+```sql
+select * from t_xxx 
+where condition
+group by xx having  xx on xx
+order by xx desc/asc
+limit 0,10
+
+select age as a 起别名
+
+distinct
+```
+
 ### 7.2. 条件查询
+```sql
+between 0 and 10  [0,10]
+in(1,2,3)
+like '___' # 一个占位符
+like '%%' # 模糊查询
+and &&
+or ||
+not !
+is null
+is not null
+```
 
 ### 7.3. 聚合函数
+```sql
+count
+max,min,avg,sum
 
+null不参与聚合函数，例如：count(address) address是null的不会计数。
+count(field)和count(*) 推荐后者，数据库底层做了优化。
+
+
+```
 ### 7.4. 分组查询
 
 ### 7.5. 排序
-
+```sql
+score asc/desc  默认asc
+```
 ### 7.6. 分页
+```sql
+分页是方言，第一页可以缩写。 
+limit offset,count
+limit 0,10 => limit 10  从偏移量0的位置开始，取10个数据。
+公式  
+offset=(page-1)*pageSize count=pageSize
+limit (page-1)*pageSize,pageSize
+```
+
+### 总结
+
+
+> [!important]+ 
+> 
+> 1.mysql 执行顺序
+> #TODO 
+
+
 
 
 
