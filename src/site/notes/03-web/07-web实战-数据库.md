@@ -208,9 +208,26 @@ limit (page-1)*pageSize,pageSize
 > [!important]+ 
 > 
 > 1.mysql 执行顺序
-> #TODO 
+> 
 
+```
+步骤
+select
+	5字段列表
+from
+	表名 1
+where
+	2
+group by
+	3
+having
+	4分组后条件列表
+order by
+	6.排序列表
+limit
+	7.分页参数
 
+```
 
 
 
