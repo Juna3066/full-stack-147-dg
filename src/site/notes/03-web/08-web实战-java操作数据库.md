@@ -140,12 +140,72 @@ IDEA 插件- `grep console`
 ```
 
 ### 3.3. 辅助配置 
+
+IDEA 中 mapper 接口的注解中写 sql 时候，没有提示，右键，注入 sql 选 MySQL 就可以了。
+
+Mybatis 日志配置，Yml 中配置 `mybatis.configuration.log-impl:Stdout` 控制台输出。
+
 ### 3.4. JDBC 对比 Mybatis
+
+- 解决了硬编码问题
+- 配置数据库，底层会用到数据库连接池，资源不浪费，性能更好了。
+
+@Mapper 注解了接口。程序启动，框架生成 mapper 接口的代理对象，放 IOC 容器里。
+
 ### 3.5. 数据库连接池
+
+- HikariDtaSource springboot 默认的数据库连接池
+- Druid 德鲁伊
+
+
+- 资源重用。提升系统响应速度。
+- 避免数据库连接遗漏。设置最大空闲时间，解决不释放的问题。
+
+Sun 官方接口是 DataSource，由第三方实现。SPI
+
+配置 `spring.datasource.type=`
+
 ### 3.6. XML 映射文件
+
+写 sql 的地方
+
+**要求：**
+- 映射文件的 namespace 指向 mapper 接口的全类名。
+- 方法名、返回值类型、参数一致
+
+资源目录创建文件夹，要**一级一级的分别创建**。
+
 ### 3.7. MybatisX 插件和映射路径的配置
+
+复杂 sql 用 xml。简单 sql的用注解。
+
+没同包的化，指定 xml 位置。
+`mybatis. mapper-locations=classpath: mapper/*.xml`
+
+classes 文件夹下的 mapper 文件夹。
+
+
 ### 3.8. 部门列表查询-集成 Mybatis
+
+```java
+
+```
+
 ### 3.9. 部门列表查询-数据封装
+
+sql 的字段和 java 的 field 不一致怎么办？
+
+```java
+//1.手动结果映射
+@Results({
+    @Result(column="create_time",property="createTime")
+})
+//2.sql 起别名
+//3.全局配置 开启驼峰命名
+```
+开启驼峰命名
+`mybatis.configuration.map-underscore-to-camel-case=true`
+
 
 [[03-web/07-web实战-数据库\|上一节：07-web实战-数据库]]
 
