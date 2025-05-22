@@ -5,6 +5,7 @@
 
 环境：anolis 8.10 
 
+## docker
 
 > [!cite]+ docker 参考文档
 > https://docs.docker.net.cn/engine/install/
@@ -12,13 +13,55 @@
 > https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/
 > https://github.com/dongyubin/DockerHub
 
+```bash
+# 安装 `dnf-plugins-core` 软件包（提供管理 DNF 仓库的命令）并设置仓库
+sudo dnf -y install dnf-plugins-core
+# 关闭防火墙,重要
+sudo systemctl stop firewalld
+# 添加cent仓库
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# 替换仓库中无法放问题的地址
+sudo sed -i 's+https://download.docker.com+https://mirrors.tuna.tsinghua.edu.cn/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+# 安装
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin --allowerasing
+# 配置dockerhub的镜像仓库,解决官方镜像仓库无法访问的问题
+mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<EOF
+{
+  "registry-mirrors": [
+    "https://docker.1ms.run",
+    "https://docker.mybacc.com",
+    "https://dytt.online",
+    "https://lispy.org",
+    "https://docker.xiaogenban1993.com",
+    "https://docker.yomansunter.com",
+    "https://aicarbon.xyz",
+    "https://666860.xyz",
+    "https://docker.zhai.cm",
+    "https://a.ussh.net",
+    "https://hub.littlediary.cn",
+    "https://hub.rat.dev",
+    "https://docker.m.daocloud.io"
+  ]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+# 开机启动
+sudo systemctl enable --now docker
+```
+
 
 ```bash
 sudo systemctl enable --now docker
 ```
 
+## portainer
+
 > [!cite]+ portainer 参考文档
 > https://docs.portainer.io/start/install-ce/server/docker/linux
+
+## harbor
 
 > [!cite]+ harbor 参考文档
 > https://goharbor.io/docs/2.0.0/install-config/download-installer/
