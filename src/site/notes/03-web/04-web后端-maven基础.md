@@ -102,6 +102,15 @@ IDEA 插件，maven helper, 右键 execlude 排除依赖。
 
 ### 6.2. 快速入门
 
+
+
+> [!important]+ 
+> 
+> IDEA 快捷键，快速生成测试类
+> alt + insert （我的键盘，alt fn end）
+> java 文件类名上 ctrl + shift + t 
+
+
 引入依赖，使用注解@Test
 
 test 文件夹；XXTest {
@@ -141,10 +150,15 @@ BeforeEach 每个方法执行前，会执行。
 
 lastUpdated 文件删除脚本
 ```cmd
+# 进入本地仓库目录，指向命令：
 del /s *.lastUpdated
 ```
 
 - IDEA 缓存，重启清理缓存
+- 重新下载依赖
+
+
+代码仓库：`...`
 
 
 [[03-web/03-web前端-vue基础\|上一节：03-web前端-vue基础]]
