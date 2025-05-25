@@ -10,4 +10,8 @@
 
 [[03-web/08-web实战-java操作数据库#3.7. MybatisX 插件和映射路径的配置\|MybatisX 插件]]
 
+[[03-web/08-web实战-java操作数据库#3.2. 快速入门\|grep console插件]]
+
 [[03-web/04-web后端-maven基础#IDEA 集成 Maven-全局配置\|IDEA 集成 Maven-全局配置]]
+
+
