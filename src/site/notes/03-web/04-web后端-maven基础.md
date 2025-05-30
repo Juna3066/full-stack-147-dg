@@ -77,6 +77,10 @@ pom. xml 加依赖，可以从中央仓库查依赖。
 
 IDEA 插件，maven helper, 右键 execlude 排除依赖。
 
+![assets/03-web/04-web后端-maven基础/IMG-20250528-232949-036.png](/img/user/assets/03-web/04-web%E5%90%8E%E7%AB%AF-maven%E5%9F%BA%E7%A1%80/IMG-20250528-232949-036.png)
+
+![assets/03-web/04-web后端-maven基础/IMG-20250528-233749-733.png](/img/user/assets/03-web/04-web%E5%90%8E%E7%AB%AF-maven%E5%9F%BA%E7%A1%80/IMG-20250528-233749-733.png)
+
 ### 5.3. 生命周期
 
 3 套生命周期，互不干扰。

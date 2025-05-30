@@ -59,3 +59,10 @@ test/
 ```
 
 
+## 2. 常用命令
+
+```bash
+git rm --help
+git rm -rf --cached 文件夹
+git rm --cached 文件
+```
