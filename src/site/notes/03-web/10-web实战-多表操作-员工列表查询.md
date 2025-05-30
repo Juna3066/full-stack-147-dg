@@ -48,9 +48,90 @@ SELECT * FROM emp RIGHT JOIN dept ON emp.dept_id = dept.id;
 
 ```
 
+
+> [!important]+ 
+> 
+> 内连接，只返回两个表匹配的记录，交集。
+> 
+> 外连接，返回交集，和并集的某一测
+> 
+> 左外连接
+> 
+>  返回左表的全部记录，右表匹配不到时，对应的列是 null
+> 	
+> 右外连接
+> 
+> 返回右表的全部纪律，左表匹配不到时，对应的列是 null
+> 
+> 想用户表和订单表的例子。 	
+
+
+## 2. 实验
+准备数据
+```sql
+show tables;  
+  
+drop table if exists users;  
+drop table if exists orders;  
+create table users  
+(  
+    id   int unsigned primary key auto_increment comment '用户id',  
+    name varchar(30) not null unique comment '用户名'  
+) comment '用户表';  
+create table orders  
+(  
+    id      int unsigned primary key auto_increment comment '订单id',  
+    user_id int unsigned not null comment '用户id',  
+    product varchar(20)  not null comment '商品名'  
+) comment '订单表';  
+  
+select id,name from users;  
+insert into users  
+values (null, 'Alice'),  
+       (null, 'Bob'),  
+       (null, 'Charlie');  
+select id,user_id,product from orders;  
+insert into orders  
+values (null,1,'Keyboard'),  
+       (null,2,'Monitor'),  
+       (null,4,'Mouse');
+```
+
+
+![assets/03-web/10-web实战-多表操作-员工列表查询/IMG-20250530-183021-489.png](/img/user/assets/03-web/10-web%E5%AE%9E%E6%88%98-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2/IMG-20250530-183021-489.png)
+
+```sql
+# 笛卡尔积(两表记录的所有组合)  
+select * from users inner join orders;
+```
+![assets/03-web/10-web实战-多表操作-员工列表查询/IMG-20250530-183154-804.png](/img/user/assets/03-web/10-web%E5%AE%9E%E6%88%98-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2/IMG-20250530-183154-804.png)
+
+```sql
+# 内连接，添加连接条件，返回交集(两表匹配的记录/有效数据)，消除无效数据  
+select * from users inner join orders on users.id = orders.user_id;
+```
+![assets/03-web/10-web实战-多表操作-员工列表查询/IMG-20250530-183234-239.png](/img/user/assets/03-web/10-web%E5%AE%9E%E6%88%98-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2/IMG-20250530-183234-239.png)
+
+```sql
+# 外连接，返回交集和并集的某一侧  
+# 返回左边所有的数据，右表匹配不到时，对应的列是null  
+# 返回所有用户  
+select * from users left outer join orders on users.id = orders.user_id;
+```
+
+![assets/03-web/10-web实战-多表操作-员工列表查询/IMG-20250530-183255-448.png](/img/user/assets/03-web/10-web%E5%AE%9E%E6%88%98-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2/IMG-20250530-183255-448.png)
+
+```sql
+# 返回右表所有的数据，左表匹配不到时，对应的列是null  
+# 返回所有订单  
+select * from users right outer join orders on users.id = orders.user_id;
+```
+
+![assets/03-web/10-web实战-多表操作-员工列表查询/IMG-20250530-183302-934.png](/img/user/assets/03-web/10-web%E5%AE%9E%E6%88%98-%E5%A4%9A%E8%A1%A8%E6%93%8D%E4%BD%9C-%E5%91%98%E5%B7%A5%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2/IMG-20250530-183302-934.png)
+
 > ✅ 建议优先使用显式连接，语义清晰、便于维护。
 
-### 1.3. 多表查询-子查询
+### 2.1. 多表查询-子查询
 
 - 子查询，（按子查询的结果分类）
 	- 标量子查询
@@ -72,7 +153,7 @@ SELECT * FROM emp RIGHT JOIN dept ON emp.dept_id = dept.id;
 
 >  子查询外部的语句可以是insert / update / delete / select 的任何一个，最常见的是 select。
 
-## 2. 员工列表查询
+## 3. 员工列表查询
 
 - 自己用 mapper 实现分页
 	- count
@@ -85,7 +166,7 @@ SearchParam/QueryParam 当 url 的参数多的时候，后端可以把参数用�
 
 动态 sql 条件查询。
 
-### 2.1. demo
+### 3.1. demo
 
 ```java
 
