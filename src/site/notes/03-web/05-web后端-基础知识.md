@@ -118,7 +118,7 @@ Cache-Control:
 - 1 xx
 - 2 xx
 - 3 xx
-- 4 xx
+- 4 xx `HttpStatus.SC_UNAUTHORIZED` 401
 - 5 xx
 
 ### 响应数据设置
