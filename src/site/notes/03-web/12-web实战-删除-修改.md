@@ -88,3 +88,72 @@ ifnull(expr,v1) Null v1 否则自己
 [[03-web/11-web实战-新增员工\|上一节：11-web实战-新增员工]]
 
 [[03-web/13-web实战-班级管理-自\|下一节：13-web实战-班级管理-自]]
+
+
+### @MapKey
+
+
+```
+@MapKey("columnName")
+作用
+把：
+List<Map<String,Oject>> //String是key sql的column名字 Object是column名的值
+转为 
+Map<Object,Map<String,Oject>> //多出的Object key是注解指定的columnName
+
+
+正常遍历
+List<Map<String,Oject>>
+
+
+快速索引获取用@MapKey("columnName")获取Map<Object,Map<String,Oject>>
+
+```
+
+| 类型                        | key 来源         | value 类型       | 常用场景           |
+| --------------------------- | ---------------- | ---------------- | ------------------ |
+| `Map<Object, Map>`          | SQL 中某列的值   | 一行数据的 KV 表 | 报表统计、简单查询 |
+| `Map<Object, Entity>`       | 实体中某字段的值 | 单个实体对象     | 数据缓存、索引     |
+| `Map<Object, List<Entity>>` | 分组字段的值     | 分组后的实体集合 | 分组列表、树状结构 |
+| 
+
+
+```java
+public interface EmpMapper {
+
+    @MapKey("deptId") // 使用 deptId 作为分组 key
+    Map<Integer, List<Employee>> selectEmpGroupByDept();
+}
+
+```
+
+```xml
+<mapper namespace="com.example.mapper.EmpMapper">
+
+    <!-- 映射 Employee 实体 -->
+    <resultMap id="EmpResultMap" type="com.example.entity.Employee">
+        <id     property="id"     column="id"/>
+        <result property="name"   column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="deptId" column="dept_id"/>
+    </resultMap>
+
+    <!-- 按部门分组返回员工列表 -->
+    <select id="selectEmpGroupByDept" resultMap="EmpResultMap">
+        SELECT id, name, gender, dept_id
+        FROM emp
+        ORDER BY dept_id
+    </select>
+</mapper>
+
+
+```
+
+结果
+
+```
+{
+  1: [ {id: 1, name: "张三", deptId: 1}, {id: 2, name: "李四", deptId: 1} ],
+  2: [ {id: 3, name: "王五", deptId: 2} ]
+}
+```
